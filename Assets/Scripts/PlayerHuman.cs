@@ -23,6 +23,6 @@ public class PlayerHuman : MonoBehaviour
 
     void LateUpdate()
     {
-        transform.rotation = Quaternion.Euler(rotation);
+        transform.localRotation = Quaternion.Euler(rotation);
     }
 }
