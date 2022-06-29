@@ -11,7 +11,7 @@ public class WaterFloat : MonoBehaviour
     public bool attachToSurface = false;
     public bool affectDirection = true;
 
-    protected Rigidbody rigidbody;
+    protected Rigidbody rb;
     protected Waves waves;
 
     protected float waterLine;
@@ -26,8 +26,8 @@ public class WaterFloat : MonoBehaviour
     void Awake()
     {
         waves = FindObjectOfType<Waves>();
-        rigidbody = GetComponent<Rigidbody>();
-        rigidbody.useGravity = false;
+        rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
 
         waterLinePoints = new Vector3[floatPoints.Length];
         for (int i = 0; i > floatPoints.Length; i++)
@@ -53,14 +53,14 @@ public class WaterFloat : MonoBehaviour
         waterLine = newWaterLine;
 
         var gravity = Physics.gravity;
-        rigidbody.drag = airDrag;
+        rb.drag = airDrag;
         if (waterLine > center.y)
         {
-            rigidbody.drag = waterDrag;
+            rb.drag = waterDrag;
 
             if (attachToSurface)
             {
-                rigidbody.position = new Vector3(rigidbody.position.x, waterLine - centerOffset.y, rigidbody.position.z);
+                rb.position = new Vector3(rb.position.x, waterLine - centerOffset.y, rb.position.z);
             }
             else
             {
@@ -69,14 +69,14 @@ public class WaterFloat : MonoBehaviour
             }
         }
 
-        rigidbody.AddForce(gravity * Mathf.Clamp(Mathf.Abs(waterLine - center.y), 0, 1));
+        rb.AddForce(gravity * Mathf.Clamp(Mathf.Abs(waterLine - center.y), 0, 1));
 
         targetUp = PhysicsHelper.GetNormal(waterLinePoints);
 
         if (pointUnderWater)
         {
             targetUp = Vector3.SmoothDamp(transform.up, targetUp, ref smoothVectorRotation, 0.2f);
-            rigidbody.rotation = Quaternion.FromToRotation(transform.up, targetUp) * rigidbody.rotation;
+            rb.rotation = Quaternion.FromToRotation(transform.up, targetUp) * rb.rotation;
         }
     }
 }

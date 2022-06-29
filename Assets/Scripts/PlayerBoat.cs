@@ -7,7 +7,7 @@ public class PlayerBoat : MonoBehaviour
     public float rotateSpeed = 0;
     public float rowSpeed = 0;
 
-    void Update()
+    void FixedUpdate()
     {
         float x = Input.GetAxis("Horizontal");
         float z = Input.GetAxis("Vertical");
