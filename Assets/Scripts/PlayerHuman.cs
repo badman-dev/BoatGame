@@ -8,6 +8,10 @@ public class PlayerHuman : MonoBehaviour
 
     float mouseSensitivity = 600f;
 
+    float maxInteractDistance = 10f;
+
+    public PlayerInventory inventory;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -19,6 +23,17 @@ public class PlayerHuman : MonoBehaviour
         rotation.x += -Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
         rotation.x = Mathf.Clamp(rotation.x, -90f, 90f);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            RaycastHit hit;
+
+            if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxInteractDistance))
+            {
+                if (hit.transform.gameObject.GetComponent<InventoryItem>())
+                    inventory.InventoryAdd(hit.transform.gameObject);
+            }
+        }
     }
 
     void LateUpdate()
