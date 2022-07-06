@@ -31,7 +31,10 @@ public class PlayerHuman : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxInteractDistance))
             {
                 if (hit.transform.gameObject.GetComponent<InventoryItem>())
+                {
+                    hit.transform.gameObject.GetComponent<InventoryItem>().Pickup();
                     inventory.InventoryAdd(hit.transform.gameObject);
+                }
             }
         }
     }
