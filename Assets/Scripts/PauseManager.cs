@@ -11,7 +11,7 @@ public class PauseManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.P))
         {
             if (paused)
             {
@@ -31,8 +31,7 @@ public class PauseManager : MonoBehaviour
         paused = true;
         pausePanels[panelNum].SetActive(true);
 
-        //player.enabled = false;
-        //camera.enabled = false;
+        Time.timeScale = 0;
     }
 
     public void CloseScreens()
@@ -44,13 +43,12 @@ public class PauseManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         paused = false;
 
-        //player.enabled = true;
-        //camera.enabled = true;
+        Time.timeScale = 1;
     }
 
-    public void MainMenu()
+    public void LoadScene(string name)
     {
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene(name);
     }
 
     public void ExitGame()
