@@ -28,7 +28,7 @@ public class Waves : MonoBehaviour
         meshFilter.mesh = mesh;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         var verts = mesh.vertices;
 

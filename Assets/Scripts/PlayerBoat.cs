@@ -7,6 +7,8 @@ public class PlayerBoat : MonoBehaviour
     public float rotateSpeed = 0;
     public float rowSpeed = 0;
 
+    public Animator paddleAnimator;
+
     void FixedUpdate()
     {
         float x = Input.GetAxis("Horizontal");
@@ -20,6 +22,11 @@ public class PlayerBoat : MonoBehaviour
         if (z != 0)
         {
             transform.Translate(0, 0, z * rowSpeed);
+        }
+
+        if (paddleAnimator)
+        {
+            paddleAnimator.SetFloat("ForwardSpeed", z);
         }
     }
 }
