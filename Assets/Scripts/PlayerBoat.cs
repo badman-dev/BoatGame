@@ -9,6 +9,13 @@ public class PlayerBoat : MonoBehaviour
 
     public Animator paddleAnimator;
 
+    Rigidbody rb;
+
+    void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void FixedUpdate()
     {
         float x = Input.GetAxis("Horizontal");
@@ -22,6 +29,7 @@ public class PlayerBoat : MonoBehaviour
         if (z != 0)
         {
             transform.Translate(0, 0, z * rowSpeed);
+            //rb.AddForce(transform.forward * z *rowSpeed);
         }
 
         if (paddleAnimator)

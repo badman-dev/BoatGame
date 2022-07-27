@@ -8,6 +8,7 @@ public class InventoryItem : MonoBehaviour
     public PlayerInventory inventory;
 
     public AudioClip pickupSound;
+    public AudioClip putdownSound;
 
     AudioSource audio;
 
@@ -19,6 +20,12 @@ public class InventoryItem : MonoBehaviour
     public void Pickup()
     {
         audio.clip = pickupSound;
+        audio.Play();
+    }
+
+    public void Putdown()
+    {
+        audio.clip = putdownSound;
         audio.Play();
     }
 }

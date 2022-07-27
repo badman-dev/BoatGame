@@ -5,53 +5,51 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    public List<Transform> inventorySlotTransforms;
-
     public List<InventorySlot> inventorySlots;
 
-    void Start()
+    public void InventoryAdd(GameObject item, InventorySlot slot)
     {
-        for(int i = 0; i < inventorySlotTransforms.Count; i++)
-        {
-            inventorySlots.Add(new InventorySlot() { location = inventorySlotTransforms[i].localPosition });
-        }
-    }
+        slot.item = item;
 
-    public void InventoryAdd(GameObject item)
-    {
-        //foreach(InventorySlot slot in inventorySlots)
+        item.transform.parent = slot.transform;
+        item.transform.localPosition = Vector3.zero;
+
+        //for (int i = 0; i < inventorySlots.Count; i++)
         //{
+        //    InventorySlot slot = inventorySlots[i];
+
         //    if (slot.item == null)
         //    {
         //        slot.item = item;
 
-        //        item.transform.parent = transform;
-        //        item.transform.localPosition = slot.location;
+        //        item.transform.parent = slot.transform;
+        //        item.transform.localPosition = Vector3.zero;
 
         //        break;
         //    }
         //}
+    }
 
+    public void InventoryRemove(GameObject item)
+    {
+        Debug.Log("inven remove");
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             InventorySlot slot = inventorySlots[i];
 
-            if (slot.item == null)
+            if (slot.item == item)
             {
-                slot.item = item;
-
-                item.transform.parent = transform;
-                item.transform.localPosition = slot.location;
-
+                Debug.Log("same item found in " + i);
+                slot.item = null;
                 break;
             }
         }
     }
 
-    [Serializable]
-    public struct InventorySlot
-    {
-        public Vector3 location;
-        public GameObject item;
-    }
+    //[Serializable]
+    //public struct InventorySlot
+    //{
+    //    public Vector3 location;
+    //    public GameObject item;
+    //}
 }

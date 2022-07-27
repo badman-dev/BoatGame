@@ -12,6 +12,8 @@ public class PlayerHuman : MonoBehaviour
 
     public PlayerInventory inventory;
 
+    GameObject heldObject;
+
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,10 +32,28 @@ public class PlayerHuman : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxInteractDistance))
             {
-                if (hit.transform.gameObject.GetComponent<InventoryItem>())
+                if (heldObject != null)
                 {
-                    hit.transform.gameObject.GetComponent<InventoryItem>().Pickup();
-                    inventory.InventoryAdd(hit.transform.gameObject);
+                    if (hit.collider.transform.gameObject.GetComponent<InventorySlot>())
+                    {
+                        heldObject.GetComponent<InventoryItem>().Putdown();
+                        inventory.InventoryAdd(heldObject, hit.collider.transform.gameObject.GetComponent<InventorySlot>());
+                        heldObject.GetComponent<Collider>().enabled = true;
+                        heldObject = null;
+                    }
+                }
+                else if (hit.collider.transform.gameObject.GetComponent<InventoryItem>())
+                {
+                    inventory.InventoryRemove(hit.collider.transform.gameObject);
+
+                    heldObject = hit.collider.transform.gameObject;
+                    heldObject.GetComponent<InventoryItem>().Pickup();
+
+                    heldObject.transform.parent = transform;
+                    heldObject.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
+
+                    heldObject.GetComponent<Collider>().enabled = false;
+
                 }
             }
         }
