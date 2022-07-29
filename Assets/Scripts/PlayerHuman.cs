@@ -34,8 +34,6 @@ public class PlayerHuman : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxInteractDistance))
             {
-                Debug.Log(hit.collider.transform.gameObject.name);
-
                 if (heldObject != null)
                 {
                     if (hit.collider.transform.gameObject.GetComponent<InventorySlot>())
@@ -82,8 +80,6 @@ public class PlayerHuman : MonoBehaviour
 
     void ThrowItem(GameObject item)
     {
-        Debug.Log("throwing");
-
         item.transform.parent = null;
 
         Rigidbody rb = item.AddComponent<Rigidbody>() as Rigidbody;
