@@ -32,14 +32,12 @@ public class PlayerInventory : MonoBehaviour
 
     public void InventoryRemove(GameObject item)
     {
-        Debug.Log("inven remove");
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             InventorySlot slot = inventorySlots[i];
 
             if (slot.item == item)
             {
-                Debug.Log("same item found in " + i);
                 slot.item = null;
                 break;
             }

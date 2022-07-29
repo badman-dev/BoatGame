@@ -7,6 +7,8 @@ public class InventoryItem : MonoBehaviour
 {
     public PlayerInventory inventory;
 
+    public bool throwable;
+
     public AudioClip pickupSound;
     public AudioClip putdownSound;
 

@@ -19,7 +19,6 @@ public class MonsterController : MonoBehaviour
     public float patrolRandomDistance = 1;
 
     Transform chaseTarget;
-    //bool isChasing = false;
 
     void Start()
     {
