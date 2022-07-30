@@ -14,7 +14,7 @@ public class PlayerHuman : MonoBehaviour
 
     public PlayerInventory inventory;
 
-    GameObject heldObject;
+    public GameObject heldObject;
 
     void Start()
     {
@@ -34,6 +34,7 @@ public class PlayerHuman : MonoBehaviour
 
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxInteractDistance))
             {
+                //Debug.Log(hit.collider.transform.gameObject.name);
                 if (heldObject != null)
                 {
                     if (hit.collider.transform.gameObject.GetComponent<InventorySlot>())
@@ -43,9 +44,22 @@ public class PlayerHuman : MonoBehaviour
                         heldObject.GetComponent<Collider>().enabled = true;
                         heldObject = null;
                     }
+                    else if (hit.collider.transform.gameObject.GetComponent<KeyDestination>() && heldObject.GetComponent<KeySource>())
+                    {
+                        KeySource keySrc = heldObject.GetComponent<KeySource>();
+                        int keyID = keySrc.keyID;
+                        bool didUnlock = hit.collider.transform.gameObject.GetComponent<KeyDestination>().AttemptUnlock(keyID);
+
+                        if (didUnlock)
+                        {
+                            keySrc.PlayUnlockSound();
+                            Destroy(heldObject);
+                            heldObject = null;
+                        }
+                    }
 
                     //throw code
-                    else if (hit.transform.gameObject.tag != "Player" && heldObject.GetComponent<InventoryItem>().throwable)
+                    else if (hit.transform.gameObject.tag != "Player")
                     {
                         ThrowItem(heldObject);
                     }
@@ -80,16 +94,19 @@ public class PlayerHuman : MonoBehaviour
 
     void ThrowItem(GameObject item)
     {
-        item.transform.parent = null;
+        if (item.GetComponent<InventoryItem>().throwable)
+        {
+            item.transform.parent = null;
 
-        Rigidbody rb = item.AddComponent<Rigidbody>() as Rigidbody;
+            Rigidbody rb = item.AddComponent<Rigidbody>() as Rigidbody;
 
-        Vector3 cameraDir = GetComponentInChildren<Camera>().transform.forward;
-        Debug.Log(cameraDir);
-        rb.AddForce(cameraDir * throwStrength * 100);
+            Vector3 cameraDir = GetComponentInChildren<Camera>().transform.forward;
+            Debug.Log(cameraDir);
+            rb.AddForce(cameraDir * throwStrength * 100);
 
-        heldObject.GetComponent<Collider>().enabled = true;
+            heldObject.GetComponent<Collider>().enabled = true;
 
-        heldObject = null;
+            heldObject = null;
+        }
     }
 }
