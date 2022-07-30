@@ -29,7 +29,8 @@ public class PlayerBoat : MonoBehaviour
         if (z != 0)
         {
             transform.Translate(0, 0, z * rowSpeed);
-            //rb.AddForce(transform.forward * z *rowSpeed);
+            //Vector3 force = new Vector3(0, 0, z * rowSpeed);
+            //rb.AddForce(force);
         }
 
         if (paddleAnimator)

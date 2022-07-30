@@ -34,11 +34,15 @@ public class WaveGameplay : MonoBehaviour
 
         MonsterController[] monsters = FindObjectsOfType<MonsterController>();
 
+        Transform chasePoint = new GameObject("ChasePoint").transform;
+        chasePoint.gameObject.tag = "ChasePoint";
+        chasePoint.position = other.transform.position;
+
         foreach (MonsterController monster in monsters)
         {
-            if (Vector3.Distance(other.transform.position, monster.transform.position) <= monster.chaseRadius * 4)
+            if (Vector3.Distance(chasePoint.position, monster.transform.position) <= monster.chaseRadius * 4)
             {
-                monster.StartChase(other.transform);
+                monster.StartChase(chasePoint.transform);
             }
         }
     }

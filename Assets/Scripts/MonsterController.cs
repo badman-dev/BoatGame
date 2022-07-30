@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class MonsterController : MonoBehaviour
 {
+    GameManager gm;
+
     NavMeshAgent nav;
     Transform playerTransform;
 
@@ -22,6 +24,8 @@ public class MonsterController : MonoBehaviour
 
     void Start()
     {
+        gm = FindObjectOfType<GameManager>();
+
         nav = GetComponent<NavMeshAgent>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -79,7 +83,7 @@ public class MonsterController : MonoBehaviour
         {
             Vector3 loweredPlayerPos = new Vector3(playerTransform.position.x, transform.position.y, playerTransform.position.z);
 
-            if (Vector3.Distance(transform.position, loweredPlayerPos) <= chaseRadius)
+            if (Vector3.Distance(transform.position, loweredPlayerPos) <= chaseRadius && (Input.GetAxis("Vertical") >= .8f || Input.GetAxis("Vertical") <= -.8f))
             {
                 StartChase(playerTransform);
                 //isChasing = true;
@@ -95,14 +99,20 @@ public class MonsterController : MonoBehaviour
         {
             nav.SetDestination(chaseTarget.position);
 
-            if (Vector3.Distance(transform.position, chaseTarget.position) <= chaseRadius)
+            Vector3 loweredTargetPos = new Vector3(chaseTarget.position.x, transform.position.y, chaseTarget.position.z);
+
+            if (Vector3.Distance(transform.position, loweredTargetPos) <= interactRadius)
             {
                 if (chaseTarget == playerTransform)
                 {
-                    //attack player
+                    gm.GameFail();
                 }
                 else
                 {
+                    if (chaseTarget.gameObject.tag == "ChasePoint")
+                        Destroy(chaseTarget.gameObject);
+
+                    yield return new WaitForSeconds(5);
                     StartSearch();
                 }
             }

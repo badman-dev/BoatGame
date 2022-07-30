@@ -45,7 +45,7 @@ public class PlayerHuman : MonoBehaviour
                     }
 
                     //throw code
-                    else if (heldObject.GetComponent<InventoryItem>().throwable)
+                    else if (hit.transform.gameObject.tag != "Player" && heldObject.GetComponent<InventoryItem>().throwable)
                     {
                         ThrowItem(heldObject);
                     }
