@@ -35,7 +35,11 @@ public class PlayerHuman : MonoBehaviour
             if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, maxInteractDistance))
             {
                 //Debug.Log(hit.collider.transform.gameObject.name);
-                if (heldObject != null)
+                if (hit.collider.transform.gameObject.GetComponent<Interactable>())
+                {
+                    hit.collider.transform.gameObject.GetComponent<Interactable>().Interact();
+                }
+                else if (heldObject != null)
                 {
                     if (hit.collider.transform.gameObject.GetComponent<InventorySlot>())
                     {
@@ -70,6 +74,7 @@ public class PlayerHuman : MonoBehaviour
 
                     heldObject = hit.collider.transform.gameObject;
                     heldObject.GetComponent<InventoryItem>().Pickup();
+                    heldObject.GetComponent<InventoryItem>().hitsWater = false;
 
                     heldObject.transform.parent = transform;
                     heldObject.transform.localPosition = new Vector3(0, -0.3f, 0.6f);
@@ -92,10 +97,23 @@ public class PlayerHuman : MonoBehaviour
         transform.localRotation = Quaternion.Euler(rotation);
     }
 
+    public void setLockState(bool isLocked)
+    {
+        if (isLocked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            return;
+        }
+
+        Cursor.lockState = CursorLockMode.None;
+    }
+
     void ThrowItem(GameObject item)
     {
         if (item.GetComponent<InventoryItem>().throwable)
         {
+            heldObject.GetComponent<InventoryItem>().hitsWater = true;
+
             item.transform.parent = null;
 
             Rigidbody rb = item.AddComponent<Rigidbody>() as Rigidbody;

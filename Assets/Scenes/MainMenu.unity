@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ac4018736e70b942a45b0f0c1debf94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Dimension: 150
+  dimension: 100
   UVScale: 2
   Octaves:
   - speed: {x: 30, y: 30}

@@ -21,7 +21,7 @@ public class WaveGameplay : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.GetComponent<InventoryItem>())
+        if (other.gameObject.GetComponent<InventoryItem>() && other.gameObject.GetComponent<InventoryItem>().hitsWater)
         {
             ItemSplash(other.gameObject);
         }
