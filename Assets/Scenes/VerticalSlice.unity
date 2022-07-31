@@ -5893,7 +5893,7 @@ MonoBehaviour:
 
 
     I am not sure what we
-    will find ahead, but the moral has been greatly increased by this progress.'
+    will find ahead, but morale has been greatly increased by this progress.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -15675,14 +15675,22 @@ PrefabInstance:
       objectReference: {fileID: 3088548856808186829}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 999075541}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 1146568075}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
@@ -15690,19 +15698,39 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: setLockState
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
       value: LoadScene
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerHuman, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
       value: PauseManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
       value: MainMenu
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
       propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 4654016260985987390, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
+      propertyPath: onEnter.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 4654016260985987391, guid: ec628fa3ac6e13946a62f374be259d73, type: 3}
